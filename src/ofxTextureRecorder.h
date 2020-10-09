@@ -161,4 +161,15 @@ public:
 	void setPath(std::string _path) {
 		path = _path;
 	}
+	//some helpers to verify settings
+	//bc i don't know how to change on runtime !
+	int getWidth() {
+		return width;
+	}
+	int getHeight() {
+		return height;
+	}
+	int getFrame() {
+		return frame;
+	}
 };
