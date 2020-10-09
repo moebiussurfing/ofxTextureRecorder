@@ -16,10 +16,10 @@
 #include "HPVCreator.hpp"
 #endif
 
-class ofxTextureRecorder{
+class ofxTextureRecorder {
 public:
-    ~ofxTextureRecorder();
-	struct Settings{
+	~ofxTextureRecorder();
+	struct Settings {
 		Settings(int w, int h);
 		Settings(const ofTexture & tex);
 		Settings(const ofTextureData & texData);
@@ -41,7 +41,7 @@ public:
 	};
 
 #if OFX_VIDEO_RECORDER || OFX_HPVLIB
-	struct VideoSettings{
+	struct VideoSettings {
 		VideoSettings(int w, int h, float fps);
 		VideoSettings(const ofTexture & tex, float fps);
 		VideoSettings(const ofTextureData & texData, float fps);
@@ -72,10 +72,10 @@ public:
 	void setup(const Settings & settings);
 	void setup(const ofTexture & tex);
 	void setup(const ofTextureData & texData);
-    void save(const ofTexture & tex);
-    void save(const ofTexture & tex, int frame);
-	void stop(){
-		if(!encodeThreads.empty()){
+	void save(const ofTexture & tex);
+	void save(const ofTexture & tex, int frame);
+	void stop() {
+		if (!encodeThreads.empty()) {
 			stopThreads();
 		}
 	}
@@ -91,13 +91,13 @@ private:
 	ofShortPixels getShortBuffer();
 	ofFloatPixels getFloatBuffer();
 	std::vector<half_float::half> getHalfFloatBuffer();
-	struct Buffer{
+	struct Buffer {
 		size_t id;
 		std::string path;
 		void * data;
 	};
 	template<typename T>
-	struct Frame{
+	struct Frame {
 		size_t id;
 		std::string path;
 		T pixels;
@@ -116,26 +116,26 @@ private:
 	ofThreadChannel<ofShortPixels> returnShortPixelsChannel;
 	ofThreadChannel<ofFloatPixels> returnFloatPixelsChannel;
 	ofThreadChannel<std::vector<half_float::half>> returnHalfFloatPixelsChannel;
-    ofThreadChannel<std::pair<std::string, ofBuffer>> encodedChannel;
+	ofThreadChannel<std::pair<std::string, ofBuffer>> encodedChannel;
 	ofThreadChannel<size_t> channelReady;
 	bool firstFrame = true;
 	bool isVideo = false;
 	bool isHPV = false;
 	std::vector<ofBufferObject> pixelBuffers;
-    ofPixelFormat pixelFormat;
-    ofImageFormat imageFormat;
+	ofPixelFormat pixelFormat;
+	ofImageFormat imageFormat;
 
-    std::string folderPath;
+	std::string folderPath;
 	int width = 0;
 	int height = 0;
 	int frame = 0;
 	GLenum glType = GL_UNSIGNED_BYTE;
 	size_t size = 0;
 	size_t maxMemoryUsage = 2000000000;
-    std::condition_variable done;
-    std::vector<std::future<bool>> waiting;
-    std::thread saveThread;
-    std::vector<std::thread> encodeThreads;
+	std::condition_variable done;
+	std::vector<std::future<bool>> waiting;
+	std::thread saveThread;
+	std::vector<std::thread> encodeThreads;
 	std::vector<std::thread> halfDecodingThreads;
 	std::thread downloadThread;
 	std::queue<size_t> buffersReady;
@@ -153,4 +153,12 @@ private:
 	ThreadSafe_Queue<HPV::HPVCompressionProgress> hpvProgress;
 	std::thread hpvProgressThread;
 #endif
+
+	//add customizable output path
+private:
+	string path;
+public:
+	void setPath(std::string _path) {
+		path = _path;
+	}
 };

@@ -8,6 +8,8 @@ void ofApp::setup(){
 	settings.imageFormat = OF_IMAGE_FORMAT_JPEG;
 	settings.numThreads = 12;
 	settings.maxMemoryUsage = 9000000000;
+
+	recorder.setPath("myStills/");
 	recorder.setup(settings);
 }
 
