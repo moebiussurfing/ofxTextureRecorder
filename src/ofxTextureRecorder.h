@@ -154,6 +154,11 @@ private:
 	std::thread hpvProgressThread;
 #endif
 
+	// NOTE: about my ofxTextureRecorder fork
+	// this setPath is not required on my customized fork of ofxTextureRecorder
+	// bc it's already implemented using settings
+	//settings.folderPath = "path";
+
 	//add customizable output path
 private:
 	string path;
